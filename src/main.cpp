@@ -1,17 +1,21 @@
 //Copyright 2022 Radoslaw Jaros
 
+// cppcheck-suppress missingIncludeSystem
 #include <Arduino.h>
 
 const int analogReadShortEventPin = 1;
 const int digitalSignalPinToRelayPin = 0;
 const int ledPin = LED_BUILTIN;
-
 const int analogReadThreshold = 700; //max 1023 = 5V
+const int analogReadDivider = 100;
 
 const unsigned long hikvisionPowerLossDelay = 3000; //README.md 1)
 const unsigned long acceptNextCommandTime = 8000;
-
 const unsigned long shortRelayTime = 500; // time range for Nice Roubus600 0.4-0.8s
+const unsigned long debounceDelay = 500;  // the debounce time; increase if the output flickers
+const unsigned long blinkRelayTriggered = 250;
+const unsigned long blinkErrorToFastTime = 600;
+const unsigned long initialBlinkTime = 100;
 
 
 boolean buttonState = false;     // the current reading from the input pin
@@ -19,7 +23,6 @@ boolean lastButtonState = false; // the previous reading from the input pin
 
 unsigned long lastCommandTime = 0;  // the last time the relay was triggered
 unsigned long lastDebounceTime = 0; // the last time the output pin was toggled
-unsigned long debounceDelay = 500;  // the debounce time; increase if the output flickers
 
 /**
 * Used for blinking built-in LED
@@ -44,7 +47,7 @@ void setup() {
 
   // power loss (of everything)
   delay(hikvisionPowerLossDelay);
-  blink(3, 100);
+  blink(3, initialBlinkTime);
 }
 
 // cppcheck-suppress unusedFunction
@@ -80,11 +83,11 @@ void loop() {
           // turn the NC on Relay
           digitalWrite(digitalSignalPinToRelayPin, HIGH);
           // blink n-times depends on analogRead value and divided by 100
-          blink(analogReadShortEventPinValue / 100, 250);
+          blink(analogReadShortEventPinValue / analogReadDivider, blinkRelayTriggered);
           lastCommandTime = currentTime;
         } else {
           //Not enough time between commands
-          blink(1, 600);
+          blink(1, blinkErrorToFastTime);
         }
       }
     }

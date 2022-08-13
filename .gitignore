@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Platform.io
+.pio/
+.sconsign.dblite
+.clang_complete
+.gcc-flags.json

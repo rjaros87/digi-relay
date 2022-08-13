@@ -2,7 +2,7 @@
 
 ### The story
 
-Some time ago I bought a `Hikvision` video intercome, model `DS-KIS604-S(B)` and I want use it to control my sliding gate.
+Some time ago I bought a `Hikvision` video intercome, model `DS-KIS604-S(B)` and I'm using it to control my sliding gate.
 The intercome allows me to open/close the gate using:
 * mobile app (remote aspect) - `HikConnect`
 * indoor station `DS-KH6320-WTE1`
@@ -20,7 +20,7 @@ On some portal I've read that `SBS` socket is fine for short circuit within time
 ### Solution
 
 To workaround this issue, I've picked an old `Digispark Tiny85` and relay module `HW-307` and built cheap _time relay_.
-Probably there are better solutions, but at that time I had it at home.
+Probably there are better solutions, but at that time I had those parts at home.
 
 The idea is simple, the door station short circuit on the Digispark and it triggers relay module to short `SBS` socket in gate automation.
 
@@ -41,8 +41,11 @@ The idea is simple, the door station short circuit on the Digispark and it trigg
 
 \* GND - to one leg of 10k Ohm resistor, to second leg connect P2 pin and NO2 from door station.
 
-\*\* VIN - in my Digispark there is `78L05` voltage regulator which accepts 30V maximum input voltage, but I've connected 12V which is also used for electric strike.
+\*\* VIN - in my Digispark there is `78L05` voltage regulator which accepts 30V maximum input voltage, but I've connected to 12V power supply which is also used for electric strike.
 
+### Photos
+
+The photos can be found [here](/docs/pictures).
 
 ### Useful materials and examples that project base on it
 

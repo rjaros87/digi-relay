@@ -2,8 +2,8 @@
 
 ### The story
 
-Some time ago I bought a `Hikvision` video intercome, model `DS-KIS604-S(B)` and I'm using it to control my sliding gate.
-The intercome allows me to open/close the gate using:
+Some time ago I bought a `Hikvision` video intercom, model `DS-KIS604-S(B)` and I'm using it to control my sliding gate.
+The intercom allows me to open/close the gate using:
 * mobile app (remote aspect) - `HikConnect`
 * indoor station `DS-KH6320-WTE1`
 * button
@@ -13,16 +13,16 @@ First test. Opening sliding gate was fine. But when I triggered to close, the ga
 
 ### The issue
 
-Opening the gate through HikConnect door station was fine, but closing the gate was tricky part. Door station short connection circuit at least for 1 second! And couldn't be decreased! The time resolution for Hikvision is in seconds.
+Opening the gate through HikConnect door station was fine, but closing the gate was a tricky part. Door station closes the circuit at least for 1 second! And couldn't be decreased! The time resolution for Hikvision is in seconds.
 
-On some portal I've read that `SBS` socket is fine for short circuit within time range between `0.4` - `0.8` second.
+On some portal I've read that `SBS` socket is fine for closed circuit within time range between `0.4` - `0.8` second.
 
 ### Solution
 
 To workaround this issue, I've picked an old `Digispark Tiny85` and relay module `HW-307` and built cheap _time relay_.
 Probably there are better solutions, but at that time I had those parts at home.
 
-The idea is simple, the door station short circuit on the Digispark and it triggers relay module to short `SBS` socket in gate automation.
+The idea is simple, the door station closes circuit on the Digispark and it triggers relay module to close `SBS` circuit in gate automation.
 
 ### Connections
 
